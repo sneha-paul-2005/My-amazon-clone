@@ -1,5 +1,7 @@
 import { cart } from "../scripts/cart.js"; // in order to modules to work , it should be run using a  live server
 
+import { products } from "../data/products.js";
+
 let productHTML = '';
 
 products.forEach((products) => {
