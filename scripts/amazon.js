@@ -1,3 +1,5 @@
+import { cart } from "../scripts/cart.js"; // in order to modules to work , it should be run using a  live server
+
 let productHTML = '';
 
 products.forEach((products) => {
@@ -86,9 +88,7 @@ document.querySelectorAll('.js-add-to-cart-button').forEach((button) => {
     });
 
     document.querySelector('.js-cart-quantity').innerText = cartQuantity;
-
     console.log(cartQuantity);
-   
     console.log(cart);
   });
 });
