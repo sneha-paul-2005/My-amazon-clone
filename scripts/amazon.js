@@ -1,4 +1,4 @@
-import { cart } from "../scripts/cart.js"; // in order to modules to work , it should be run using a  live server
+import { cart , addToCart} from "../scripts/cart.js"; // in order to modules to work , it should be run using a  live server
 
 import { products } from "../data/products.js";
 
@@ -62,35 +62,25 @@ products.forEach((products) => {
 
 document.querySelector('.js-products-grid').innerHTML = productHTML;
 
+
+
+function getCartQuantity() {
+    let cartQuantity = 0;
+
+        cart.forEach((cartItem) => {
+          cartQuantity += cartItem.quantity;
+        });
+
+        document.querySelector('.js-cart-quantity').innerText = cartQuantity;
+        console.log(cartQuantity);
+        console.log(cart);
+    }
+
+
 document.querySelectorAll('.js-add-to-cart-button').forEach((button) => {
   button.addEventListener('click', () => {
     const productId = button.dataset.productId;
-
-    let matchingItem;
-
-    cart.forEach((item) => {
-      if (item.productId === productId) {
-        matchingItem = item;
-      }
-    });
-    if (matchingItem) {
-      matchingItem.quantity += 1;
-    }
-    else {
-       cart.push({
-      productId: productId,
-      quantity: 1
-    });
-    }
-
-    let cartQuantity = 0;
-
-    cart.forEach((item) => {
-      cartQuantity += item.quantity;
-    });
-
-    document.querySelector('.js-cart-quantity').innerText = cartQuantity;
-    console.log(cartQuantity);
-    console.log(cart);
+    addToCart(productId);
+    getCartQuantity();
   });
 });
