@@ -16,7 +16,7 @@ cart.forEach((cartItem) =>{
   });
 
   cartSummaryHTML += `
-  <div class="cart-item-container">
+  <div class="cart-item-container js-item-container-${matchingProduct.id}">
   <div class="delivery-date">
   Delivery date: Tuesday, June 21
   </div>
@@ -71,7 +71,7 @@ cart.forEach((cartItem) =>{
           Wednesday, June 15
         </div>
         <div class="delivery-option-price">
-          $4.99 - Shipping
+          ₹70.00 - Shipping
         </div>
       </div>
     </div>
@@ -84,7 +84,7 @@ cart.forEach((cartItem) =>{
           Monday, June 13
         </div>
         <div class="delivery-option-price">
-          $9.99 - Shipping
+          ₹120.00 - Shipping
         </div>
       </div>
     </div>
@@ -96,9 +96,14 @@ cart.forEach((cartItem) =>{
 });
 
 document.querySelector('.js-order-summary').innerHTML = cartSummaryHTML;
+
+
 document.querySelectorAll('.js-delete-link').forEach((link) => {
   link.addEventListener('click', () => {
     const productId = link.dataset.productId;
     removeFromCart(productId);
+
+   const container = document.querySelector(`.js-item-container-${productId}`);
+   container.remove();
   });
 });
