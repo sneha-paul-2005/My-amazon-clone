@@ -1,11 +1,11 @@
 import { cart , addToCart} from "../scripts/cart.js"; // in order to modules to work , it should be run using a  live server
 
 import { products } from "../data/products.js";
+import {formatCurrency} from "./money.js";
 
 let productHTML = '';
 
 products.forEach((products) => {
-   const usd_to_ind = 89.82;
   productHTML += `
   <div class="product-container">
           <div class="product-image-container">
@@ -26,7 +26,7 @@ products.forEach((products) => {
           </div>
 
           <div class="product-price">
-            ₹${((products.priceCents / 100)*usd_to_ind).toFixed(2)}
+            ${formatCurrency(products.priceCents)}
           </div>
 
           <div class="product-quantity-container">
