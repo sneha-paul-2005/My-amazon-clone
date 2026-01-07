@@ -1,24 +1,28 @@
 import { formatCurrency } from '../scripts/money.js';
 
-function expected(priceCents) {
-  return `₹${((priceCents / 100) * 89.82).toFixed(2)}`;
+console.log('test suite: formatCurrency');
+
+console.log('converts cents into dollars');
+
+if (formatCurrency(2095) === '20.95') {
+  console.log('passed');
+} else {
+  console.log('failed');
 }
 
-console.log('works with various inputs:');
+console.log('works with 0');
 
-if (formatCurrency(0) === expected(0)) {
-  console.log('formatCurrency(0) passed');
+if (formatCurrency(0) === '0.00') {
+  console.log('passed');
 } else {
-  console.error('formatCurrency(0) failed');
+  console.log('failed');
 }
-if (formatCurrency(199) === expected(199)) {
-  console.log('formatCurrency(199) passed');
+
+console.log('rounds up to the nearest cent');
+
+if (formatCurrency(2000.5) === '20.01') {
+  console.log('passed');
 } else {
-  console.error('formatCurrency(199) failed');
-}
-if (formatCurrency(2500) === expected(2500)) {
-  console.log('formatCurrency(2500) passed');
-} else {
-  console.error('formatCurrency(2500) failed');
+  console.log('failed');
 }
 
