@@ -1,4 +1,4 @@
-import { formatCurrency } from '../scripts/money.js';
+import { formatCurrency } from '../../scripts/money.js';
 
 describe('formatCurrency – INR conversion', () => {
 
