@@ -29,7 +29,7 @@ cart.forEach((cartItem) =>{
 
 
   cartSummaryHTML += `
-  <div class="cart-item-container js-item-container-${matchingProduct.id}">
+  <div class="cart-item-container js-cart-item-container js-item-container-${matchingProduct.id}">
   <div class="delivery-date">
   Delivery date: ${dateString}
   </div>
@@ -45,14 +45,14 @@ cart.forEach((cartItem) =>{
     <div class="product-price">
       ${formatCurrency(matchingProduct.priceCents)}
     </div>
-    <div class="product-quantity">
+    <div class="product-quantity js-product-quantity-${matchingProduct.id}">
       <span>
         Quantity: <span class="quantity-label">${cartItem.quantity}</span>
       </span>
       <span class="update-quantity-link link-primary">
         Update
       </span>
-      <span class="delete-quantity-link link-primary js-delete-link" data-product-id = "${matchingProduct.id}">
+      <span class="delete-quantity-link link-primary js-delete-link js-delete-link-${matchingProduct.id}" data-product-id = "${matchingProduct.id}">
         Delete
       </span>
     </div>
@@ -106,7 +106,15 @@ let HTML = '';
     return HTML;
 }
 
-document.querySelector('.js-order-summary').innerHTML = cartSummaryHTML;
+const orderSummaryElement =
+  document.querySelector('.js-order-summary');
+
+if (!orderSummaryElement) {
+  return;
+}
+
+orderSummaryElement.innerHTML = cartSummaryHTML;
+
 
 
 document.querySelectorAll('.js-delete-link').forEach((link) => {
@@ -114,9 +122,16 @@ document.querySelectorAll('.js-delete-link').forEach((link) => {
     const productId = link.dataset.productId;
     removeFromCart(productId);
 
-   const container = document.querySelector(`.js-item-container-${productId}`);
-   container.remove();
-    renderPaymentSummary();
+   const container =
+  document.querySelector(`.js-item-container-${productId}`);
+
+if (container) {
+  container.remove();
+}
+    if (document.querySelector('.js-payment-summary')) {
+  renderPaymentSummary();
+}
+
   });
 });
 
